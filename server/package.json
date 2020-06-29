@@ -1,0 +1,23 @@
+{
+  "name": "uploadfile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "David Prada <davidprali27@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "fs-extra": "^9.0.1",
+    "mongoose": "5.9.20",
+    "multer": "1.4.2",
+    "uuid": "8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.4"
+  }
+}

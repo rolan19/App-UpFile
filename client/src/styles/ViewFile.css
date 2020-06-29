@@ -1,0 +1,66 @@
+.View-file {
+  width: 580px;
+  height: 180px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+  border-radius: 4px;
+  padding: 3px;
+  margin-bottom: 10px;
+  user-select: none;
+}
+
+.View-file .file_img {
+  width: 174px;
+  height: 174px;
+  background-color: rgba(0, 0, 0, 0.14);
+  vertical-align: middle;
+  border-radius: 4px;
+}
+.View-file .file_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right;
+  border-radius: 4px;
+}
+
+.file_description {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas: "name name" "type size" "update update";
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  box-sizing: border-box;
+  padding: 1.5em;
+}
+
+.prim {
+  font-size: 13px;
+  color: rgb(119, 119, 119);
+  padding-bottom: 2px;
+}
+
+.secon {
+  font-size: 14px;
+  color: #333333;
+}
+
+.name {
+  grid-area: name;
+}
+.type {
+  grid-area: type;
+}
+.size {
+  grid-area: size;
+}
+.update {
+  grid-area: update;
+}

@@ -2,6 +2,7 @@
 const express = require("express");
 const path = require("path");
 const router = require("./network/router");
+const cors = require("cors");
 
 //Inicializando
 const app = express();
@@ -12,6 +13,7 @@ const { config } = require("../config");
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 //Rutas
 app.get("/api", (req, res) => {

@@ -2,6 +2,7 @@
 
 | EndPoint       | HTTP       | COMENTARIO                                      | URL                                 |
 | -------------- | ---------- | ----------------------------------------------- | ----------------------------------- |
+| /api/upload    | GET        | Este es un html                                 | http://localhost:4000/api/upload    |
 | /api/          | GET        | Ese te muestra todos los EndPoint               | http://localhost:4000/api           |
 | /api/files/    | GET        | Este devuelve todo los usuarios con un archivo. | http://localhost:4000/api/files     |
 | /api/files/:ID | GET/:ID    | Este devuelve un usuario en especifico.         | http://localhost:4000/api/files/:id |

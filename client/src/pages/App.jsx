@@ -15,7 +15,7 @@ const App = () => {
   // const [imagenUrl, setImagenUrl] = useState("");
   // const [subiendoImagen, setSubiendoImagen] = useState(false);
   // const [enviandoPost, setEnviandoPost] = useState(false);
-  // const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState("");
   const [image, setImage] = useState({});
 
   const [files, setFiles] = useState([]);
@@ -62,15 +62,26 @@ const App = () => {
     setImage(file);
   };
 
+  const handleChange = (e) => {
+    setCaption(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await Axios.post(API, {
-        image: image,
-      });
+      // await Axios.post(API, {
+      //   title: caption,
+      //   image: image,
+      // });
       console.log(image);
-      console.log(res);
+      // console.log(res);
+      // const response = {
+      //   title: caption,
+      //   image: image,
+      // };
+      // console.log(response);
+      // console.log(image);
     } catch (error) {
       console.log(error);
     }
@@ -103,6 +114,7 @@ const App = () => {
         <UpdateFile handleSubmit={handleSubmit}>
           <div>
             <input type="file" name="image" onChange={handleImage} />
+            <input type="text" onChange={handleChange} />
           </div>
         </UpdateFile>
       </main>

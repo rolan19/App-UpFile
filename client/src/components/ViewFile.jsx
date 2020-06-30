@@ -5,7 +5,7 @@ import imgBDD from "../assets/base-de-datos.svg";
 import imgText from "../assets/codigo-fuente.svg";
 import "../styles/ViewFile.css";
 
-const ViewFile = ({ file, createdAt }) => {
+const ViewFile = ({ title, file, createdAt }) => {
   const validationPreview = () => {
     let permitImage = /.(png|jpg|jpeg|svg)$/;
     // const permitMovie = /.mp4$/;
@@ -43,7 +43,7 @@ const ViewFile = ({ file, createdAt }) => {
       <div className="file_description">
         <div className="name">
           <p className="prim">Nombre:</p>
-          <p className="secon">Sin Nombre</p>
+          <p className="secon">{title}</p>
         </div>
         <div className="type">
           <p className="prim">Tipo:</p>

@@ -2,8 +2,8 @@ const { Schema, model } = require("mongoose");
 
 const fileModel = new Schema(
   {
-    title: String,
-    file: String,
+    title: { type: String },
+    file: { type: String },
   },
   {
     timestamps: true,

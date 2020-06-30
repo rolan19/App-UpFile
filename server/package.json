@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "David Prada <davidprali27@gmail.com>",
@@ -19,6 +20,7 @@
     "uuid": "8.2.0"
   },
   "devDependencies": {
+    "chalk": "4.1.0",
     "nodemon": "2.0.4"
   }
 }

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const chalk = require("chalk");
 
 const db = mongoose.connection;
 
@@ -11,7 +12,7 @@ async function connectionDB(url) {
   });
 }
 db.once("open", () => {
-  console.log(`[DB Connect] => [Succesfully]`);
+  console.log(chalk.bold.blue(`[DB Connect] => [Succesfully]`));
 });
 
 db.on("error", () => {

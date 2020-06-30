@@ -3,51 +3,64 @@ const path = require("path");
 const fs = require("fs-extra");
 const fileModel = require("./model");
 const response = require("../../network/response");
-const { update } = require("./model");
-// const { config } = require("../../../config");
 
 async function getFiles(req, res) {
   try {
     const getFiles = await fileModel.find();
     response.success(req, res, getFiles, 200);
   } catch (err) {
-    response.error(req, res, err, 500, "Error de GET FILE CONTROLLER");
+    response.error(
+      req,
+      res,
+      err,
+      500,
+      chalk.bold.red("Error de GET FILE CONTROLLER")
+    );
   }
 }
 
 async function getFile(req, res) {
-  const { id } = req.params;
   try {
-    const getFile = await fileModel.findOne({ _id: id }[0]);
+    const { id } = req.params;
+    const getFile = await fileModel.findOne({ _id: id });
     response.success(req, res, getFile, 200);
   } catch (err) {
-    response.error(req, res, err, 500, "Error de GET/:ID FILE CONTROLLER");
+    response.error(
+      req,
+      res,
+      err,
+      500,
+      chalk.bold.red("Error de GET/:ID FILE CONTROLLER")
+    );
   }
 }
 
 async function createFile(req, res) {
-  const { title } = req.body;
-  // const file = req.file;
   try {
-    // let fileURL = "";
-    // if (file) {
-    //   fileURL = `http://localhost:${config.api.port}/` + file.path;
-    // }
-    const newFile = fileModel({
+    const { title } = req.body;
+    console.log(title);
+    console.log(req.file);
+    const newFile = new fileModel({
       title: title,
       file: req.file.path,
     });
-    const createFile = await newFile.save();
-    response.success(req, res, createFile, 201);
+    const create = await newFile.save();
+    response.success(req, res, create, 201);
   } catch (err) {
-    response.error(req, res, err, 500, "Error de POST FILE CONTROLLER");
+    response.error(
+      req,
+      res,
+      err,
+      500,
+      chalk.bold.red("Error de POST FILE CONTROLLER")
+    );
   }
 }
 
 async function updateFile(req, res) {
-  const { id } = req.params;
-  const { title } = req.body;
   try {
+    const { id } = req.params;
+    const { title } = req.body;
     const eliminar = await fileModel.findById(id);
     if (eliminar) {
       await fs.unlink(path.resolve(eliminar.file));
@@ -62,20 +75,32 @@ async function updateFile(req, res) {
     );
     response.success(req, res, updateFile, 200);
   } catch (err) {
-    response.error(req, res, err, 500, "Error de UPDATE FILE CONTROLLER");
+    response.error(
+      req,
+      res,
+      err,
+      500,
+      chalk.bold.red("Error de UPDATE FILE CONTROLLER")
+    );
   }
 }
 
 async function deleteFile(req, res) {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const File = await fileModel.findByIdAndRemove(id);
     if (File) {
       await fs.unlink(path.resolve(File.file));
     }
-    response.success(req, res, "eliminado", 300);
+    response.success(req, res, "eliminado", 204);
   } catch (err) {
-    response.error(req, res, err, 500, "Error de DELETE FILE CONTROLLER");
+    response.error(
+      req,
+      res,
+      err,
+      500,
+      chalk.bold.red("Error de DELETE FILE CONTROLLER")
+    );
   }
 }
 

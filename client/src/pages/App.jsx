@@ -16,26 +16,18 @@ const App = () => {
   // const [subiendoImagen, setSubiendoImagen] = useState(false);
   // const [enviandoPost, setEnviandoPost] = useState(false);
   // const [caption, setCaption] = useState("");
-  const [file, setFile] = useState({});
+  const [image, setImage] = useState({});
 
-  const [files, setFiles] = useState([
-    {
-      _id: "5efa5eefe6b32c1d2091e51a",
-      file: "uploads/e82b2337-5fd9-4df9-82be-caddde42e80f.png",
-      createdAt: "2020-06-29T21:36:47.927Z",
-      updatedAt: "2020-06-29T21:36:47.927Z",
-      __v: 0,
-    },
-  ]);
+  const [files, setFiles] = useState([]);
 
   // LISTADO DE PUBLICACION DE ARCHIVOS
-  // const fetchFiles = async () => {
-  //   const { data } = await Axios.get(API);
-  //   setFiles(data.msg);
-  // };
+  const fetchFiles = async () => {
+    const { data } = await Axios.get(API);
+    setFiles(data.msg);
+  };
 
   useEffect(() => {
-    // fetchFiles();
+    fetchFiles();
   }, []);
 
   // SUBIDA DE ARCHIVOS
@@ -67,17 +59,18 @@ const App = () => {
 
   const handleImage = (e) => {
     const file = e.target.files[0];
-    setFile(file);
+    setImage(file);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // await Axios.post( API, {
-      //   file,
-      // });
-      console.log(file);
+      const res = await Axios.post(API, {
+        image: image,
+      });
+      console.log(image);
+      console.log(res);
     } catch (error) {
       console.log(error);
     }

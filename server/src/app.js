@@ -9,6 +9,8 @@ const app = express();
 
 //config
 const { config } = require("../config");
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 //Middlewares
 app.use(express.json());
@@ -21,7 +23,12 @@ app.get("/api", (req, res) => {
     files: `http://localhost:${config.api.port}/api/files`,
   });
 });
+
 router(app);
+
+app.get("/api/upload", (req, res) => {
+  res.render("index");
+});
 
 //static files
 app.use("/uploads", express.static(path.resolve("uploads")));

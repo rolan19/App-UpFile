@@ -4,19 +4,17 @@ import Axios from "axios";
 import Header from "../components/Header";
 import UpdateFile from "../components/UpdateFile";
 import ViewFile from "../components/ViewFile";
-// import iconUpLoad from "../assets/computacion-en-la-nube.svg";
+import iconUpLoad from "../assets/computacion-en-la-nube.svg";
 import "../styles/App.css";
 
 const App = () => {
   // APIS
-  const API = "http://localhost:4000/api/files";
+  const API = "http://localhost:4000/api/files/";
 
   // ESTADOS
-  // const [imagenUrl, setImagenUrl] = useState("");
-  // const [subiendoImagen, setSubiendoImagen] = useState(false);
-  // const [enviandoPost, setEnviandoPost] = useState(false);
+  const [urlImage, setUrlImage] = useState("");
   const [caption, setCaption] = useState("");
-  const [image, setImage] = useState({});
+  const [imageFile, setImageFile] = useState(null);
 
   const [files, setFiles] = useState([]);
 
@@ -30,58 +28,34 @@ const App = () => {
     fetchFiles();
   }, []);
 
-  // SUBIDA DE ARCHIVOS
-
-  // const handleImageSelect = async (e) => {
-  //   const APIUPFILE = "http://localhost:3000/api/upload/";
-
-  //   try {
-  //     setSubiendoImagen(true);
-  //     let file = e.target.files[0];
-  //     setSubiendoImagen(true);
-
-  //     // const response = await Axios.post(APIUPFILE, {
-  //     //   archivos,
-  //     // });
-  //     // console.log(response);
-  //     setTimeout(() => {
-  //       console.log(file);
-  //       setSubiendoImagen(false);
-  //     }, 2000);
-  //     // console.log(archivos.name);
-  //   } catch (error) {
-  //     setSubiendoImagen(false);
-  //     console.log(error);
-  //   }
-  // };
-
-  // PUBLICACION DE ARCHIVOS
+  // PREVIEW DE LA IMAGEN
 
   const handleImage = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+    setImageFile(e.target.files[0]);
+    previewImage(e.target.files[0]);
   };
 
-  const handleChange = (e) => {
-    setCaption(e.target.value);
+  const previewImage = (urlImage) => {
+    const image = URL.createObjectURL(urlImage);
+    setUrlImage(image);
   };
 
+  // PUBLICANDO EL ARCHIVO
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // await Axios.post(API, {
-      //   title: caption,
-      //   image: image,
-      // });
-      console.log(image);
-      // console.log(res);
-      // const response = {
-      //   title: caption,
-      //   image: image,
-      // };
-      // console.log(response);
-      // console.log(image);
+      let formData = new FormData();
+
+      formData.append("title", caption);
+      formData.append("image", imageFile);
+
+      await Axios.post(API, formData);
+
+      fetchFiles();
+      setCaption("");
+      setUrlImage("");
+      setImageFile(null);
     } catch (error) {
       console.log(error);
     }
@@ -89,9 +63,10 @@ const App = () => {
 
   // ELIMINANDO ARCHIVOS
 
-  // const handleDelete = async (id) => {
-  //   await Axios.delete(`${APIFILES}${id}`);
-  // };
+  const handleDelete = async (id) => {
+    await Axios.delete(`${API}${id}`);
+    fetchFiles();
+  };
 
   return (
     <>
@@ -104,18 +79,36 @@ const App = () => {
               {files.map((item) => (
                 <ViewFile
                   key={item._id}
-                  // handleDelete={() => handleDelete(item._id)}
+                  handleDelete={() => handleDelete(item._id)}
+                  formFile="formFile"
                   {...item}
                 />
               ))}
             </div>
           </div>
         </section>
-        <UpdateFile handleSubmit={handleSubmit}>
-          <div>
-            <input type="file" name="image" onChange={handleImage} />
-            <input type="text" onChange={handleChange} />
-          </div>
+        <UpdateFile
+          handleSubmit={handleSubmit}
+          handleChange={(e) => setCaption(e.target.value)}
+          caption={caption}
+        >
+          <>
+            {urlImage === "" ? (
+              <>
+                <div className="Upload__select">
+                  <img src={iconUpLoad} alt="Sube tu archivo" />
+                  <p>Selecciona o Arrastra un Archivo</p>
+                </div>
+                <input
+                  type="file"
+                  className="Upload__file"
+                  onChange={handleImage}
+                />
+              </>
+            ) : (
+              <img src={urlImage} className="Upload__imagePreview" />
+            )}
+          </>
         </UpdateFile>
       </main>
     </>

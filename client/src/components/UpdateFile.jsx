@@ -1,16 +1,18 @@
 import React from "react";
 import "../styles/UpdateFile.css";
-const UpdateFile = ({ children, handleSubmit }) => {
+const UpdateFile = ({ children, handleSubmit, handleChange, caption }) => {
   return (
     <section>
-      <div className="Upload">
-        <form onSubmit={handleSubmit}>
-          <div className="Upload__image">{children}</div>
+      <form className="Upload" onSubmit={handleSubmit}>
+        <h1 className="Upload__title">Sube tus archivos</h1>
+        <div className="Upload__container">{children}</div>
+        <div className="Upload__name">
+          <input type="text" value={caption} onChange={handleChange} />
           <button className="Upload__submit" type="submit">
             Publicar
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </section>
   );
 };

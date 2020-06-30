@@ -5,7 +5,7 @@ import imgBDD from "../assets/base-de-datos.svg";
 import imgText from "../assets/codigo-fuente.svg";
 import "../styles/ViewFile.css";
 
-const ViewFile = ({ title, file, createdAt }) => {
+const ViewFile = ({ title, file, createdAt, handleDelete }) => {
   const validationPreview = () => {
     let permitImage = /.(png|jpg|jpeg|svg)$/;
     // const permitMovie = /.mp4$/;
@@ -36,7 +36,7 @@ const ViewFile = ({ title, file, createdAt }) => {
   };
 
   return (
-    <article className="View-file">
+    <article className="View-file" onDoubleClick={handleDelete}>
       <div className="file_img">
         <img src={validationPreview()} alt="" />
       </div>

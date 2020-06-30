@@ -2,13 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: rgb(117, 192, 218);
+        color: black;
+      }
+      .text {
+        background-color: aliceblue;
+        text-align: center;
+      }
+      .formulario {
+        text-align: center;
+      }
+    </style>
     <title>Subida de imagenes</title>
   </head>
   <body>
-    <h1>Subida Imagenes</h1>
-    <div>
-      <form action="/api/files" method="POST" enctype="multipart/form-data">
+    <div class="conteiner">
+      <h1 class="text">Subida Imagenes</h1>
+      <form
+        action="/api/files"
+        method="POST"
+        enctype="multipart/form-data"
+        class="formulario"
+      >
         <input type="text" name="title" />
         <input type="file" name="image" />
         <button>

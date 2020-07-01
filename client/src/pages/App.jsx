@@ -5,6 +5,10 @@ import Header from "../components/Header";
 import UpdateFile from "../components/UpdateFile";
 import ViewFile from "../components/ViewFile";
 import iconUpLoad from "../assets/computacion-en-la-nube.svg";
+import IconClose from "../assets/close.svg";
+// import imgJS from "../assets/tipo-js.svg";
+// import imgBDD from "../assets/base-de-datos.svg";
+// import imgText from "../assets/codigo-fuente.svg";
 import "../styles/App.css";
 
 const App = () => {
@@ -13,6 +17,7 @@ const App = () => {
 
   // ESTADOS
   const [urlImage, setUrlImage] = useState("");
+  const [typeFile, setTypeFile] = useState("");
   const [caption, setCaption] = useState("");
   const [imageFile, setImageFile] = useState(null);
 
@@ -35,9 +40,36 @@ const App = () => {
     previewImage(e.target.files[0]);
   };
 
-  const previewImage = (urlImage) => {
-    const image = URL.createObjectURL(urlImage);
-    setUrlImage(image);
+  const previewImage = (image) => {
+    const imageUrl = URL.createObjectURL(image);
+    setUrlImage(imageUrl);
+    setTypeFile(image.name);
+  };
+
+  const validatePreview = () => {
+    let permitImage = /.(png|jpg|jpeg|svg)$/;
+    let permitMovie = /.(mp4|webm|ogg)$/;
+    // let permitServer = /.(sql|odb|mdb)$/;
+    // let permitJS = /.js$/;
+
+    if (permitImage.exec(typeFile)) {
+      return (
+        <img src={urlImage} alt={typeFile} className="Upload__imagePreview" />
+      );
+    } else if (permitMovie.exec(typeFile)) {
+      return <video src={urlImage} className="Upload__imagePreview"></video>;
+    }
+    // else if (permitJS.exec(typeFile)) {
+    //   return imgJS;
+    // } else {
+    //   return imgText;
+    // }
+  };
+
+  const handleClose = () => {
+    setImageFile(null);
+    setUrlImage("");
+    setTypeFile("");
   };
 
   // PUBLICANDO EL ARCHIVO
@@ -53,9 +85,10 @@ const App = () => {
       await Axios.post(API, formData);
 
       fetchFiles();
+      setImageFile(null);
       setCaption("");
       setUrlImage("");
-      setImageFile(null);
+      setTypeFile("");
     } catch (error) {
       console.log(error);
     }
@@ -103,11 +136,17 @@ const App = () => {
                   type="file"
                   className="Upload__file"
                   onChange={handleImage}
+                  accept="image/*,video/*"
                   required
                 />
               </>
             ) : (
-              <img src={urlImage} className="Upload__imagePreview" />
+              <>
+                <div className="detete_select" onClick={handleClose}>
+                  <img src={IconClose} alt="close" className="btn-close" />
+                </div>
+                {validatePreview()}
+              </>
             )}
           </>
         </UpdateFile>

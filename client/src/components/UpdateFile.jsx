@@ -12,8 +12,9 @@ const UpdateFile = ({ children, handleSubmit, handleChange, caption }) => {
             placeholder="Escribe un nombre"
             value={caption}
             onChange={handleChange}
-            minLength="1"
+            minLength="2"
             maxLength="40"
+            autoComplete="off"
             required
           />
           <button className="Upload__submit" type="submit">

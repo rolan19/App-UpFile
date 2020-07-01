@@ -1,5 +1,6 @@
 .Upload {
-  width: 550px;
+  width: 100%;
+  max-width: 550px;
   height: 370px;
   display: grid;
   grid-template-columns: auto;
@@ -20,7 +21,7 @@
 
 .Upload__container {
   position: relative;
-  width: 548px;
+  width: inherit;
   height: 289px;
   display: flex;
   justify-content: center;
@@ -92,4 +93,32 @@
 .Upload__name button {
   cursor: pointer;
   font-family: "Roboto", sans-serif;
+}
+
+.detete_select {
+  width: 22px;
+  height: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 4;
+  top: 5px;
+  right: 5px;
+  line-height: 19px;
+  background-color: #333333;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  transition: ease-in;
+}
+
+.detete_select:hover {
+  filter: invert(1);
+}
+
+.detete_select .btn-close {
+  width: 9px;
+  height: 9px;
+  display: block;
 }

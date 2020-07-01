@@ -2,9 +2,9 @@
   max-width: 1260px;
   height: auto;
   display: grid;
-  grid-template-columns: 50% 46%;
+  grid-template-columns: 56% 43%;
   grid-template-rows: auto;
-  grid-gap: 4%;
+  grid-gap: 1%;
   box-sizing: border-box;
   padding: 2em 1.5em;
   margin: 0 auto;

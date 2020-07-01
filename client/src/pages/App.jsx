@@ -103,6 +103,7 @@ const App = () => {
                   type="file"
                   className="Upload__file"
                   onChange={handleImage}
+                  required
                 />
               </>
             ) : (

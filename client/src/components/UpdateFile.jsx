@@ -7,7 +7,15 @@ const UpdateFile = ({ children, handleSubmit, handleChange, caption }) => {
         <h1 className="Upload__title">Sube tus archivos</h1>
         <div className="Upload__container">{children}</div>
         <div className="Upload__name">
-          <input type="text" value={caption} onChange={handleChange} />
+          <input
+            type="text"
+            placeholder="Escribe un nombre"
+            value={caption}
+            onChange={handleChange}
+            minLength="1"
+            maxLength="40"
+            required
+          />
           <button className="Upload__submit" type="submit">
             Publicar
           </button>
